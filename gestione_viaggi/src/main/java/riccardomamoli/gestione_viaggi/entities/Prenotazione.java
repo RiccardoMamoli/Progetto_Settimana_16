@@ -17,7 +17,7 @@ public class Prenotazione {
     @JoinColumn(name = "idDipendente")
     private Dipendente dipendente;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "idViaggio")
     private Viaggio viaggio;
 

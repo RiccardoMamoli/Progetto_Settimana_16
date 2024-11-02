@@ -1,6 +1,7 @@
 package riccardomamoli.gestione_viaggi.services;
 
-import org.hibernate.query.Page;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -11,7 +12,6 @@ import riccardomamoli.gestione_viaggi.exceptions.NotFoundException;
 import riccardomamoli.gestione_viaggi.payloads.NewDipendenteDTO;
 import riccardomamoli.gestione_viaggi.repositories.DipendenteRepository;
 
-import java.awt.print.Pageable;
 
 @Service
 public class DipendenteService {
@@ -30,15 +30,12 @@ public class DipendenteService {
         return this.dipendenteRepository.save(newDipendente);
     }
 
-    /*
-
-    public Page<Dipendente> findAllDipendenti(int page, int size, String sortBy){
-        if(size > 100) size = 100;
-        Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by(sortBy));
-        return this.dipendenteRepository.findAll(pageable);
+    public Page<Dipendente> findAll(int page, int size, String sortBy) {
+        if (size > 100) size = 100;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        return dipendenteRepository.findAll(pageable);
     }
 
-     */
 
     public Dipendente findById(Long idDipendente){
         return this.dipendenteRepository.findById(idDipendente).orElseThrow(() -> new NotFoundException(idDipendente));
