@@ -11,9 +11,7 @@ import java.util.List;
 
 @Repository
 public interface PrenotazioneRepository extends JpaRepository<Prenotazione, Long> {
-
- boolean existsByDipendenteIdAndDataRichiesta(Long id, LocalDate dataRichiesta);
-
+ 
  boolean existsByDipendenteIdAndViaggioDataViaggio(Long idDipendente, LocalDate dataViaggio);
 
  List<Prenotazione> findByDataRichiesta(LocalDate dataRichiesta);
