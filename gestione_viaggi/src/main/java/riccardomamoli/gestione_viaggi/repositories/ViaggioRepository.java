@@ -7,5 +7,4 @@ import riccardomamoli.gestione_viaggi.entities.Viaggio;
 
 @Repository
 public interface ViaggioRepository extends JpaRepository<Viaggio, Long> {
-    boolean exsitsByIdViaggio(Long idViaggio);
 }

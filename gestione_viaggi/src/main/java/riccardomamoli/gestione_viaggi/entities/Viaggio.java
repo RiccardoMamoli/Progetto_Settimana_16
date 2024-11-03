@@ -12,7 +12,7 @@ public class Viaggio {
 
     @Id
     @GeneratedValue
-    private Long idViaggio;
+    private Long id;
     private String destinazioneViaggio;
     private LocalDate dataViaggio;
 
@@ -28,8 +28,8 @@ public class Viaggio {
         this.statoViaggio = statoViaggio;
     }
 
-    public Long getIdViaggio() {
-        return idViaggio;
+    public Long getId() {
+        return id;
     }
 
 
@@ -60,7 +60,7 @@ public class Viaggio {
     @Override
     public String toString() {
         return "Viaggio{" +
-                "idViaggio=" + idViaggio +
+                "id=" + id +
                 ", destinazioneViaggio='" + destinazioneViaggio + '\'' +
                 ", dataViaggio=" + dataViaggio +
                 ", statoViaggio=" + statoViaggio +

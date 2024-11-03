@@ -42,11 +42,14 @@ public class PrenotazioneService {
     }
 
     public Prenotazione savePrenotazione(NewPrenotazioneDTO body) {
+
+
         Viaggio viaggio = viaggioRepository.findById(body.idViaggio()).orElseThrow(() -> new NotFoundException(body.idViaggio()));
         Dipendente dipendente = dipendenteRepository.findById(body.idDipendente()).orElseThrow(() -> new NotFoundException(body.idDipendente()));
 
-        if(prenotazioneRepository.existsByIdDipendenteIdAndDataRichiesta(dipendente.getIdDipendente(), body.dataRichiesta())) {
-            throw new BadRequestException("Esiste gia una prenotazione per il dipendente con ID " + dipendente.getIdDipendente() + " in data " + body.dataRichiesta());
+        if (prenotazioneRepository.existsByDipendenteIdAndViaggioDataViaggio(dipendente.getId(), viaggio.getDataViaggio())) {
+            throw new BadRequestException("Esiste già una prenotazione per il dipendente con ID "
+                    + dipendente.getId() + " nella data " + viaggio.getDataViaggio());
         }
 
         Prenotazione prenotazione = new Prenotazione(dipendente, viaggio, body.dataRichiesta(), body.preferenzeDipendente());
@@ -58,8 +61,8 @@ public class PrenotazioneService {
         prenotazioneRepository.delete(prenotazione);
     }
 
-    public Page<Prenotazione> getPrenotazioniByIdDipendente(Long idDipendente, Pageable pageable) {
-        return prenotazioneRepository.findByIdDipendente(idDipendente, pageable);
+    public Page<Prenotazione> getPrenotazioniByIdDipendente(Long id, Pageable pageable) {
+        return prenotazioneRepository.findByDipendenteId(id, pageable);
     }
 
     public Page<Prenotazione> getAllPrenotazioni(Pageable pageable) {

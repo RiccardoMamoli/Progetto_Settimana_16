@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface DipendenteRepository extends JpaRepository<Dipendente, Long> {
-    boolean exsistsByIdDipendente(Long idDipendente);
     Optional<Dipendente> findByEmailDipendente(String emailDipendente);
+    Optional<Dipendente> findByUsernameDipendente(String usernameDipendente);
 }

@@ -13,7 +13,7 @@ public class Dipendente {
 
     @Id
     @GeneratedValue
-    private Long idDipendente;
+    private Long id;
     private String nomeDipendente;
     private String cognomeDipendente;
     private String usernameDipendente;
@@ -38,8 +38,8 @@ public class Dipendente {
         this.immagineProfilo = immagineProfilo;
     }
 
-    public Long getIdDipendente() {
-        return idDipendente;
+    public Long getId() {
+        return id;
     }
 
     public String getNomeDipendente() {
@@ -77,7 +77,7 @@ public class Dipendente {
     @Override
     public String toString() {
         return "Dipendente{" +
-                "idDipendente=" + idDipendente +
+                "id=" + id +
                 ", nomeDipendente='" + nomeDipendente + '\'' +
                 ", cognomeDipendente='" + cognomeDipendente + '\'' +
                 ", usernameDipendente='" + usernameDipendente + '\'' +

@@ -33,8 +33,12 @@ public class DipendenteService {
             throw new BadRequestException("Email " + body.emailDipendente() + " gia in uso!");
         });
 
+        this.dipendenteRepository.findByUsernameDipendente(body.usernameDipendente()).ifPresent(dipendente -> {
+            throw new BadRequestException("Username " + body.usernameDipendente() + " gia in uso!");
+        });
+
         Dipendente newDipendente = new Dipendente(body.nomeDipendente(), body.cognomeDipendente(),
-                body.emailDipendente(), body.usernameDipendente(),
+                body.usernameDipendente(), body.emailDipendente(),
                 "https://ui-avatars.com/api/?name=" + body.nomeDipendente() + "+" + body.cognomeDipendente());
 
         return this.dipendenteRepository.save(newDipendente);

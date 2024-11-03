@@ -11,9 +11,9 @@ public class Prenotazione {
 
     @Id
     @GeneratedValue
-    private Long idPrenotazione;
+    private Long id;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "idDipendente")
     private Dipendente dipendente;
 
@@ -35,8 +35,8 @@ public class Prenotazione {
         this.preferenzeDipendente = preferenzeDipendente;
     }
 
-    public Long getIdPrenotazione() {
-        return idPrenotazione;
+    public Long getId() {
+        return id;
     }
 
     public Dipendente getDipendente() {
@@ -74,7 +74,7 @@ public class Prenotazione {
     @Override
     public String toString() {
         return "Prenotazione{" +
-                "idPrenotazione=" + idPrenotazione +
+                "id=" + id +
                 ", dipendente=" + dipendente +
                 ", viaggio=" + viaggio +
                 ", dataRichiesta=" + dataRichiesta +
