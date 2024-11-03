@@ -6,12 +6,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import riccardomamoli.gestione_viaggi.entities.Prenotazione;
 import riccardomamoli.gestione_viaggi.entities.Viaggio;
 import riccardomamoli.gestione_viaggi.enums.StatoViaggio;
 import riccardomamoli.gestione_viaggi.exceptions.BadRequestException;
 import riccardomamoli.gestione_viaggi.exceptions.NotFoundException;
 import riccardomamoli.gestione_viaggi.payloads.NewViaggioDTO;
+import riccardomamoli.gestione_viaggi.repositories.DipendenteRepository;
+import riccardomamoli.gestione_viaggi.repositories.PrenotazioneRepository;
 import riccardomamoli.gestione_viaggi.repositories.ViaggioRepository;
+
+import java.time.LocalDate;
 
 @Service
 public class ViaggioService {
@@ -19,12 +24,13 @@ public class ViaggioService {
     @Autowired
     private ViaggioRepository viaggioRepository;
 
+
     public Viaggio findById(Long idViaggio) {
         return viaggioRepository.findById(idViaggio).orElseThrow(() -> new NotFoundException(idViaggio));
     }
 
     public Viaggio saveViaggio(NewViaggioDTO body){
-        Viaggio viaggio = new Viaggio(body.destinazioneViaggio(), body.datInizioViaggio(), body.dataFineViaggio() , body.statoViaggio());
+        Viaggio viaggio = new Viaggio(body.destinazioneViaggio(), body.dataViaggio(), body.statoViaggio());
         return this.viaggioRepository.save(viaggio);
 
     }
@@ -43,7 +49,7 @@ public class ViaggioService {
     public Viaggio findByIdAndUpdate(Long idViaggio, NewViaggioDTO body) {
         Viaggio viaggioFound = this.findById(idViaggio);
 
-        if(body.dataFineViaggio().isBefore(viaggioFound.getDataFineViaggio())) {
+        if(body.dataViaggio().isBefore(LocalDate.now())){
             throw new BadRequestException("La data di fine non può essere prima di quella di inizio!");
         }
 
@@ -51,31 +57,23 @@ public class ViaggioService {
             viaggioFound.setDestinazioneViaggio(body.destinazioneViaggio());
         }
 
-        if (!body.dataFineViaggio().equals(viaggioFound.getDataFineViaggio())) {
-            viaggioFound.setDataFineViaggio(body.dataFineViaggio());
-        }
-
-        if (!body.datInizioViaggio().equals(viaggioFound.getDataInizioViaggio())) {
-            viaggioFound.setDataInizioViaggio(body.datInizioViaggio());
+        if (!body.dataViaggio().equals(viaggioFound.getDataViaggio())) {
+            viaggioFound.setDataViaggio(body.dataViaggio());
         }
 
         return viaggioRepository.save(viaggioFound);
-
     }
 
-    public Viaggio updateStatoViaggio(Long idViaggio, String stato) {
-        StatoViaggio statoEnum;
-
-        try {
-            statoEnum = StatoViaggio.valueOf(stato.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new BadRequestException("Stato non valido. Stati ammessi: IN_PROGRAMMA, COMPLETATO");
-        }
+    public Viaggio updateStatoViaggio(Long idViaggio, StatoViaggio statoViaggio) {
 
         Viaggio found = this.findById(idViaggio);
-        found.setStatoViaggio(statoEnum);
+
+        found.setStatoViaggio(statoViaggio);
+
         return viaggioRepository.save(found);
     }
+
+
 
 
 

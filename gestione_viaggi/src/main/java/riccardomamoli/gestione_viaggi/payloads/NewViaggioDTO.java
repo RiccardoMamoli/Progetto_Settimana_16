@@ -12,11 +12,7 @@ public record NewViaggioDTO(
 
         @NotNull(message = "La data è obbligatoria!")
         @Future(message = "La data deve essere futura!")
-        LocalDate datInizioViaggio,
-
-        @NotNull
-        @Future(message = "La data deve essere futura!")
-        LocalDate dataFineViaggio,
+        LocalDate dataViaggio,
 
         @NotNull(message = "Seleziona lo stato per il viaggio!")
         StatoViaggio statoViaggio

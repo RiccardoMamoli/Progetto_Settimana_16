@@ -14,8 +14,7 @@ public class Viaggio {
     @GeneratedValue
     private Long idViaggio;
     private String destinazioneViaggio;
-    private LocalDate dataInizioViaggio;
-    private LocalDate dataFineViaggio;
+    private LocalDate dataViaggio;
 
 
     @Enumerated(EnumType.STRING)
@@ -23,10 +22,9 @@ public class Viaggio {
 
     public Viaggio(){};
 
-    public Viaggio(String destinazioneViaggio, LocalDate dataInizioViaggio, LocalDate dataFineViaggio, StatoViaggio statoViaggio) {
+    public Viaggio(String destinazioneViaggio, LocalDate dataViaggio, StatoViaggio statoViaggio) {
         this.destinazioneViaggio = destinazioneViaggio;
-        this.dataInizioViaggio = dataInizioViaggio;
-        this.dataFineViaggio = dataFineViaggio;
+        this.dataViaggio = dataViaggio;
         this.statoViaggio = statoViaggio;
     }
 
@@ -43,20 +41,12 @@ public class Viaggio {
         this.destinazioneViaggio = destinazioneViaggio;
     }
 
-    public LocalDate getDataInizioViaggio() {
-        return dataInizioViaggio;
+    public LocalDate getDataViaggio() {
+        return dataViaggio;
     }
 
-    public void setDataInizioViaggio(LocalDate dataInizioViaggio) {
-        this.dataInizioViaggio = dataInizioViaggio;
-    }
-
-    public LocalDate getDataFineViaggio() {
-        return dataFineViaggio;
-    }
-
-    public void setDataFineViaggio(LocalDate dataFineViaggio) {
-        this.dataFineViaggio = dataFineViaggio;
+    public void setDataViaggio(LocalDate dataViaggio) {
+        this.dataViaggio = dataViaggio;
     }
 
     public StatoViaggio getStatoViaggio() {
@@ -72,8 +62,7 @@ public class Viaggio {
         return "Viaggio{" +
                 "idViaggio=" + idViaggio +
                 ", destinazioneViaggio='" + destinazioneViaggio + '\'' +
-                ", dataInizioViaggio=" + dataInizioViaggio +
-                ", dataFineViaggio=" + dataFineViaggio +
+                ", dataViaggio=" + dataViaggio +
                 ", statoViaggio=" + statoViaggio +
                 '}';
     }

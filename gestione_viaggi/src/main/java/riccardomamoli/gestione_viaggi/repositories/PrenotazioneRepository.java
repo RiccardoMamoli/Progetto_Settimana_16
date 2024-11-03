@@ -6,12 +6,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import riccardomamoli.gestione_viaggi.entities.Prenotazione;
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface PrenotazioneRepository extends JpaRepository<Prenotazione, Long> {
  boolean exsistsByIdPrenotazione(Long idPrenotazione);
 
  boolean existsByIdDipendenteIdAndDataRichiesta(Long dipendenteId, LocalDate data);
+
+ List<Prenotazione> findByDataRichiesta(LocalDate dataRichiesta);
 
  Page<Prenotazione> findByIdDipendente(Long idDipendente, Pageable pageable);
 }

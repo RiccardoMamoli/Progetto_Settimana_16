@@ -18,14 +18,24 @@ public class Dipendente {
     private String cognomeDipendente;
     private String usernameDipendente;
     private String emailDipendente;
+    private String immagineProfilo;
 
     public Dipendente(){};
 
-    public Dipendente(String nomeDipendente, String cognomeDipendente, String usernameDipendente, String emailDipendente) {
+    public Dipendente(String nomeDipendente, String cognomeDipendente, String usernameDipendente, String emailDipendente, String immagineProfilo) {
         this.nomeDipendente = nomeDipendente;
         this.cognomeDipendente = cognomeDipendente;
         this.usernameDipendente = usernameDipendente;
         this.emailDipendente = emailDipendente;
+        this.immagineProfilo = immagineProfilo;
+    }
+
+    public String getImmagineProfilo() {
+        return immagineProfilo;
+    }
+
+    public void setImmagineProfilo(String immagineProfilo) {
+        this.immagineProfilo = immagineProfilo;
     }
 
     public Long getIdDipendente() {
@@ -72,6 +82,7 @@ public class Dipendente {
                 ", cognomeDipendente='" + cognomeDipendente + '\'' +
                 ", usernameDipendente='" + usernameDipendente + '\'' +
                 ", emailDipendente='" + emailDipendente + '\'' +
+                ", immagineProfilo='" + immagineProfilo + '\'' +
                 '}';
     }
 }

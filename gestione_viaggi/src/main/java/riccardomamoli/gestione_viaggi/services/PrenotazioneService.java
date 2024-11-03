@@ -16,6 +16,9 @@ import riccardomamoli.gestione_viaggi.repositories.DipendenteRepository;
 import riccardomamoli.gestione_viaggi.repositories.PrenotazioneRepository;
 import riccardomamoli.gestione_viaggi.repositories.ViaggioRepository;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 public class PrenotazioneService {
 
@@ -50,10 +53,21 @@ public class PrenotazioneService {
        return this.prenotazioneRepository.save(prenotazione);
     }
 
-    public void findByIdAndDelete(Long id) {
-        Prenotazione prenotazione = this.findById(id);
+    public void findByIdAndDelete(Long idDipendente) {
+        Prenotazione prenotazione = this.findById(idDipendente);
         prenotazioneRepository.delete(prenotazione);
     }
 
+    public Page<Prenotazione> getPrenotazioniByIdDipendente(Long idDipendente, Pageable pageable) {
+        return prenotazioneRepository.findByIdDipendente(idDipendente, pageable);
+    }
+
+    public Page<Prenotazione> getAllPrenotazioni(Pageable pageable) {
+        return prenotazioneRepository.findAll(pageable);
+    }
+
+    public List<Prenotazione> getPrenotazioniByDataRichiesta(LocalDate dataRichiesta) {
+        return prenotazioneRepository.findByDataRichiesta(dataRichiesta);
+    }
 
 }
